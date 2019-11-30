@@ -1,3 +1,4 @@
+
 #include<iostream>
 using namespace std;
 char a[8][8];
@@ -20,7 +21,7 @@ void display()
     }
 }
 
-int east(int x, int y,char ch)//right
+int east(int x, int y,char ch,int change)//right
 {
     int l = y,f=0;
     if(a[x][y+1] == ch || a[x][y+1] == '-')
@@ -37,19 +38,23 @@ int east(int x, int y,char ch)//right
     }
     for(int j = l-1 ; j >= y ; j-- )
     {
-        a[x][j] = ch;
-        f=1;
+        if(change == 1)
+        {
+            a[x][j] = ch;
+        }
+        f = f + 1;
     }
-    if(f==1)
+    if(f != 0)
     {
+        // cout << "right : " << f-1 << endl;
         enter = 1;
-        return 1;
+        return f-1;
     }
     else 
     return 0;
 }
 
-int west(int x, int y,char ch)//left
+int west(int x, int y,char ch,int change)//left
 {
     int l = y,f=0;
     if(a[x][y-1] == ch || a[x][y-1] == '-')
@@ -66,19 +71,23 @@ int west(int x, int y,char ch)//left
     }
     for(int j = l+1 ; j <= y ; j++ )
     {
-        a[x][j] = ch;
-        f=1;
+        if(change == 1)
+        {
+            a[x][j] = ch;
+        }
+        f = f + 1;
     }
-    if(f==1)
+    if(f != 0)
     {
+        // cout << "left : " << f-1 << endl;
         enter = 1;
-        return 1;
+        return f-1;
     }
     else
     return 0;
 }
 
-int north(int x, int y,char ch)//up
+int north(int x, int y,char ch,int change)//up
 {
     int l = x,f=0;
     if(a[x-1][y] == ch || a[x-1][y] == '-')
@@ -95,19 +104,23 @@ int north(int x, int y,char ch)//up
     }
     for( int j = l+1 ; j <= x ; j++ )
     {
-        a[j][y] = ch;
-        f=1;
+        if(change == 1)
+        {
+            a[j][y] = ch;
+        }
+        f = f + 1;
     }
-    if(f==1)
+    if(f != 0)
     {
+        // cout << "up : " << f-1 << endl;
         enter = 1;
-        return 1;
+        return f-1;
     }
     else
     return 0;
 }
 
-int south(int x, int y,char ch)//down
+int south(int x, int y,char ch,int change)//down
 {
     int l = x,f=0;
     if(a[x+1][y] == ch || a[x+1][y] == '-')
@@ -124,19 +137,23 @@ int south(int x, int y,char ch)//down
     }
     for ( int j = l-1 ; j >= x ; j-- )
     {
-        a[j][y] = ch;
-        f=1;
+        if(change == 1)
+        {
+            a[j][y] = ch;
+        }
+        f = f + 1;
     }
-    if(f==1)
+    if(f != 0)
     {
+        // cout << "down : " << f-1 << endl;
         enter = 1;
-        return 1;
+        return f-1;
     }
     else
     return 0;
 }
 
-int southwest(int x, int y,char ch)//downleft
+int southwest(int x, int y,char ch,int change)//downleft
 {
     int m = x, n = y,f=0;
     if(a[x+1][y-1] == ch || a[x+1][y-1] == '-')
@@ -156,19 +173,23 @@ int southwest(int x, int y,char ch)//downleft
     }
     for( int i = m-1, j = n+1 ; i >= x && j <= y ; i--, j++ )
     {
-        a[i][j] = ch;
-        f=1;
+        if(change == 1)
+        {
+            a[i][j] = ch;
+        }
+        f = f + 1;
     }
-    if(f==1)
+    if(f != 0)
     {
+        // cout << "downleft : " << f-1 << endl;
         enter = 1;
-        return 1;
+        return f-1;
     }
     else 
     return 0;
 }
 
-int southeast(int x, int y,char ch)//downright
+int southeast(int x, int y,char ch,int change)//downright
 {
      int m=x,n=y,f=0;
      if(a[x+1][y+1] == ch || a[x+1][y+1] == '-')
@@ -186,19 +207,23 @@ int southeast(int x, int y,char ch)//downright
     }
      for(int i=m-1,j=n-1; i>=x && j>=y; i--,j--)
      {
-         a[i][j]=ch;
-         f=1;
+         if(change == 1)
+         {
+            a[i][j]=ch;
+         }
+         f = f + 1;
      }
-     if(f==1)
+     if(f != 0)
      {
+        // cout << "downright : " << f-1 << endl;
         enter = 1;
-        return 1;
+        return f-1;
      }
      else 
      return 0;
 }
 
-int northwest(int x, int y,char ch)//upleft
+int northwest(int x, int y,char ch,int change)//upleft
 {
     int m=x,n=y,f=0;
     if(a[x-1][y-1] == ch || a[x-1][y-1] == '-')
@@ -216,19 +241,23 @@ int northwest(int x, int y,char ch)//upleft
     }
     for(int i=m+1,j=n+1;i<=x && j<=y; i++,j++)
     {
-        a[i][j]=ch;
-        f=1;
+        if(change == 1)
+        {
+            a[i][j]=ch;
+        }
+        f = f + 1;
     }
-    if(f==1)
+    if(f != 0)
     {
+        // cout << "upleft : " << f-1 << endl;
         enter = 1;
-        return 1;
+        return f-1;
     }
     else
     return 0;
 }
 
-int northeast(int x, int y,char ch)//upright
+int northeast(int x, int y,char ch,int change)//upright
 { 
     int m=x,n=y,f=0;
     if(a[x-1][y+1] == ch || a[x-1][y+1] == '-')
@@ -246,16 +275,44 @@ int northeast(int x, int y,char ch)//upright
     }
     for(int i=m+1,j=n-1; i<=x && j>=y; i++,j--)
     {
-        a[i][j]=ch;
-        f=1;
+        if(change == 1)
+        {
+            a[i][j]=ch;
+        }
+        f = f + 1;
     }
-    if(f==1)
+    if(f != 0)
     {
+        // cout << "upright : " << f-1 << endl;
         enter = 1;
-        return 1;
+        return f-1;
     }
     else
     return 0;
+}
+
+int computer_turn(char c)
+{
+    int highest_flips = 0;
+    int computer_entry = 0;
+    for(int i = 0 ; i < 8; i++)
+    {
+        for(int j = 0 ;j < 8; j++)
+        {
+            if(a[i][j] == '-')
+            {
+                int current_flips = 0;
+                current_flips = current_flips + north(i,j,c,0) + south(i,j,c,0) + east(i,j,c,0) + west(i,j,c,0) + northeast(i,j,c,0) + northwest(i,j,c,0) + southeast(i,j,c,0) + southwest(i,j,c,0);
+                if(current_flips > highest_flips)
+                {
+                    highest_flips = current_flips;
+                    computer_entry = (i * 10) + j;
+                }
+            }
+        }
+    }
+    // cout << "Highest Flips : " << highest_flips << endl; 
+    return computer_entry;
 }
 
 void who_is_winner()
@@ -271,7 +328,7 @@ void who_is_winner()
             black++;
         }
     }
-    (white == black) ? (cout << "draw match") : ((white > black) ? cout << "white is winner...!!" : cout << "black is winner...!!" << endl);
+    (white == black) ? (cout << "draw match") : ((white > black) ? cout << "Computer is winner...!!" : cout << "Player is winner...!!" << endl);
 }
 
 int main()
@@ -291,32 +348,50 @@ int main()
     display();
     for(int empty = 60; empty > 0 ; empty--)
     {
-        (empty % 2 == 0 ) ? cout << "player 1...B... turn : " <<endl : cout << "player 2...W... turn : " << endl;
-        cout << "enter the row and column : ";
-        cin >> x >> y;
-        x=x-1;
-        y=y-1;
+        (empty % 2 == 0 ) ? cout << "player 1...B... turn : " <<endl : cout << "Computer...W... turn : " << endl;
         c = ( (empty % 2) == 0 ) ? 'B' : 'W';
-        if(a[x][y] == '-')
+        if(empty % 2 == 0)
         {
-            east(x,y,c);
-            west(x,y,c);
-            north(x,y,c);
-            south(x,y,c);
-            northeast(x,y,c);
-            northwest(x,y,c);
-            southeast(x,y,c);
-            southwest(x,y,c);
-            if(enter == 0)
+            cout << "enter the row and column : ";
+            cin >> x >> y;
+            x=x-1;
+            y=y-1;
+            if(a[x][y] == '-')
+            {
+                east(x,y,c,1);
+                west(x,y,c,1);
+                north(x,y,c,1);
+                south(x,y,c,1);
+                northeast(x,y,c,1);
+                northwest(x,y,c,1);
+                southeast(x,y,c,1);
+                southwest(x,y,c,1);
+                if(enter == 0)
+                {
+                    cout << "your entry is invalid...please give a valid entry..." << endl;
+                    empty++;
+                }
+            }
+            else 
             {
                 cout << "your entry is invalid...please give a valid entry..." << endl;
                 empty++;
             }
         }
-        else 
+        else
         {
-            cout << "your entry is invalid...please give a valid entry..." << endl;
-            empty++;
+            int computer_entry = computer_turn(c);
+            x = computer_entry / 10;
+            y = computer_entry % 10;
+            cout << "Computer Entry is : " << x+1 << " " << y+1 << endl << endl;
+            east(x,y,c,1);
+            west(x,y,c,1);
+            north(x,y,c,1);
+            south(x,y,c,1);
+            northeast(x,y,c,1);
+            northwest(x,y,c,1);
+            southeast(x,y,c,1);
+            southwest(x,y,c,1);
         }
         cout << "the updated puzzle is : " << endl;
         display();
